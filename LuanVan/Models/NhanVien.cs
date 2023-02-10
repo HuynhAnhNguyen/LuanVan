@@ -23,7 +23,7 @@ public partial class NhanVien
 
     public string MatKhau { get; set; } = null!;
 
-    public string TrangThai { get; set; } = null!;
+    public int TrangThai { get; set; }
 
     public string? MaRole { get; set; }
 

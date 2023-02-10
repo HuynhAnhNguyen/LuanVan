@@ -47,7 +47,7 @@ public partial class LuanVanContext : DbContext
     {
         modelBuilder.Entity<ChiTietHd>(entity =>
         {
-            entity.HasKey(e => e.MaChiTietHd).HasName("PK__ChiTietH__651E49EBA37A5A57");
+            entity.HasKey(e => e.MaChiTietHd).HasName("PK__ChiTietH__651E49EBE6F89847");
 
             entity.ToTable("ChiTietHD");
 
@@ -73,7 +73,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<GioHang>(entity =>
         {
-            entity.HasKey(e => e.MaGioHang).HasName("PK__GioHang__F5001DA3BF44EDAB");
+            entity.HasKey(e => e.MaGioHang).HasName("PK__GioHang__F5001DA3DFD8987E");
 
             entity.ToTable("GioHang");
 
@@ -98,7 +98,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<HoaDon>(entity =>
         {
-            entity.HasKey(e => e.MaHoaDon).HasName("PK__HoaDon__835ED13B534E3A97");
+            entity.HasKey(e => e.MaHoaDon).HasName("PK__HoaDon__835ED13BED14B97C");
 
             entity.ToTable("HoaDon");
 
@@ -127,7 +127,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<KhachHang>(entity =>
         {
-            entity.HasKey(e => e.MaKhachHang).HasName("PK__KhachHan__88D2F0E5147936CB");
+            entity.HasKey(e => e.MaKhachHang).HasName("PK__KhachHan__88D2F0E563CBA40D");
 
             entity.ToTable("KhachHang");
 
@@ -146,14 +146,11 @@ public partial class LuanVanContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.TenKhachHang).HasMaxLength(50);
-            entity.Property(e => e.TrangThai)
-                .HasMaxLength(10)
-                .IsUnicode(false);
         });
 
         modelBuilder.Entity<KhuyenMai>(entity =>
         {
-            entity.HasKey(e => e.MaKm).HasName("PK__KhuyenMa__2725CF15C7F51782");
+            entity.HasKey(e => e.MaKm).HasName("PK__KhuyenMa__2725CF15FA7CF27E");
 
             entity.ToTable("KhuyenMai");
 
@@ -169,7 +166,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<LoaiSanPham>(entity =>
         {
-            entity.HasKey(e => e.MaLoaiSp).HasName("PK__LoaiSanP__1224CA7C28C28A8E");
+            entity.HasKey(e => e.MaLoaiSp).HasName("PK__LoaiSanP__1224CA7C3EB9500E");
 
             entity.ToTable("LoaiSanPham");
 
@@ -184,7 +181,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<MauSac>(entity =>
         {
-            entity.HasKey(e => e.MaMau).HasName("PK__MauSac__3A5BBB7DBBB4C681");
+            entity.HasKey(e => e.MaMau).HasName("PK__MauSac__3A5BBB7D54119EA3");
 
             entity.ToTable("MauSac");
 
@@ -196,7 +193,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<NhaSanXuat>(entity =>
         {
-            entity.HasKey(e => e.MaNsx).HasName("PK__NhaSanXu__3A1BDBD2F4E7F01A");
+            entity.HasKey(e => e.MaNsx).HasName("PK__NhaSanXu__3A1BDBD2FC5546D9");
 
             entity.ToTable("NhaSanXuat");
 
@@ -211,7 +208,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<NhanVien>(entity =>
         {
-            entity.HasKey(e => e.MaNhanVien).HasName("PK__NhanVien__77B2CA4783B18CF0");
+            entity.HasKey(e => e.MaNhanVien).HasName("PK__NhanVien__77B2CA4740367DC4");
 
             entity.ToTable("NhanVien");
 
@@ -233,9 +230,6 @@ public partial class LuanVanContext : DbContext
                 .HasMaxLength(10)
                 .IsUnicode(false);
             entity.Property(e => e.TenNhanVien).HasMaxLength(50);
-            entity.Property(e => e.TrangThai)
-                .HasMaxLength(10)
-                .IsUnicode(false);
 
             entity.HasOne(d => d.MaRoleNavigation).WithMany(p => p.NhanViens)
                 .HasForeignKey(d => d.MaRole)
@@ -244,7 +238,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<Quyen>(entity =>
         {
-            entity.HasKey(e => e.MaQuyen).HasName("PK__Quyen__1D4B7ED4C1BC3E41");
+            entity.HasKey(e => e.MaQuyen).HasName("PK__Quyen__1D4B7ED446EEB4BE");
 
             entity.ToTable("Quyen");
 
@@ -273,7 +267,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.MaRole).HasName("PK__Role__0639A0FDE6DE0CDA");
+            entity.HasKey(e => e.MaRole).HasName("PK__Role__0639A0FD556891DB");
 
             entity.ToTable("Role");
 
@@ -285,7 +279,7 @@ public partial class LuanVanContext : DbContext
 
         modelBuilder.Entity<SanPham>(entity =>
         {
-            entity.HasKey(e => e.MaSanPham).HasName("PK__SanPham__FAC7442DD9127B41");
+            entity.HasKey(e => e.MaSanPham).HasName("PK__SanPham__FAC7442D3DBFC60D");
 
             entity.ToTable("SanPham");
 

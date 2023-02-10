@@ -13,6 +13,8 @@ public partial class HoaDon
 
     public string? MaKm { get; set; }
 
+    public int TrangThai { get; set; }
+
     public virtual ICollection<ChiTietHd> ChiTietHds { get; } = new List<ChiTietHd>();
 
     public virtual KhachHang? MaKhachHangNavigation { get; set; }

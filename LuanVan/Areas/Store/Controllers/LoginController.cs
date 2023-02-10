@@ -46,6 +46,11 @@ namespace LuanVan.Areas.Store.Controllers
 			if (ModelState.IsValid)
 			{
 				KhachHang search = _service.loginKH(model.Username, model.Password);
+				if (_service.getTrangThai(search.MaKhachHang)==0)
+				{
+                    ModelState.AddModelError("", "Tài khoản của bạn đã bị khóa!");
+                    return View(model);
+                }
 				if (search == null)
 				{
 					ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng!");
@@ -108,7 +113,7 @@ namespace LuanVan.Areas.Store.Controllers
         [Area("Store"), HttpPost]
 		public IActionResult Register(RegisterModel model)
 		{
-            string otp = _service.OTP();
+            string otp = _service.createOTP();
             if (ModelState.IsValid)
 			{
                 if (model.MatKhau == model.MatKhau2)

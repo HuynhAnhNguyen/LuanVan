@@ -23,7 +23,7 @@ public partial class KhachHang
 
     public string MatKhau { get; set; } = null!;
 
-    public string TrangThai { get; set; } = null!;
+    public int TrangThai { get; set; }
 
     public virtual ICollection<GioHang> GioHangs { get; } = new List<GioHang>();
 

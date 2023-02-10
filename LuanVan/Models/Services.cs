@@ -267,7 +267,7 @@ namespace LuanVan.Models
             kh.Email = model.Email;
             kh.DiaChi = model.DiaChi;
             kh.MatKhau = getMD5(model.MatKhau);
-            kh.TrangThai = "1";
+            kh.TrangThai = int.Parse(createOTP());
             _context.KhachHangs.Add(kh);
             _context.SaveChanges();
             return maKH;
@@ -297,7 +297,7 @@ namespace LuanVan.Models
         {
             var kH = GetKH(maKH);
             _context.Update(kH);
-            kH.TrangThai = trangThai;
+            kH.TrangThai = int.Parse(trangThai);
             _context.SaveChanges();
 
         }
@@ -320,6 +320,12 @@ namespace LuanVan.Models
         static bool IsValidEmail(string input)
         {
             return Regex.IsMatch(input, @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+        }
+
+        // Lấy khách hàng
+        public KhachHang GetKHByEmailOrPhone(string input)
+        {
+            return _context.KhachHangs.Find(input);
         }
 
         // Hóa dơn
@@ -426,7 +432,7 @@ namespace LuanVan.Models
             nV.DiaChi = diaChi;
             nV.Email = email;
             nV.MatKhau = getMD5(matKhau);
-            nV.TrangThai = "1";
+            nV.TrangThai = 1;
             nV.MaRole = "1";
             _context.NhanViens.Add(nV);
             _context.SaveChanges(true);
@@ -507,7 +513,7 @@ namespace LuanVan.Models
 
         private static System.Timers.Timer _timer;
         private static string _otp;
-        public string OTP()
+        public string createOTP()
         {
             // Generate OTP
             var random = new Random();
@@ -526,7 +532,7 @@ namespace LuanVan.Models
             _timer.Stop();
         }
 
-        public string getTrangThai(string maKH)
+        public int getTrangThai(string maKH)
         {
             //var result = (from c in KhachHang
             //              where c.Email == email
