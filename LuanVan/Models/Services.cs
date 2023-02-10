@@ -181,7 +181,7 @@ namespace LuanVan.Models
 
         public void themSanPham(SanPham sanPham, IFormFile file)
         {
-            string maSP = "" + (danhSachSanPham().Count() + 1);
+            string maSP = "" + (DateTime.Now.ToString("ddMMyyyyHHmmss")+1);
             sanPham.MaSanPham = maSP;
             if (file != null)
             {
@@ -255,7 +255,8 @@ namespace LuanVan.Models
         // Thêm khách hàng ( Register)
         public string themKH(RegisterModel model)
         {
-            string maKH = "" + (danhSachKH().Count() + 1);
+            string maKH = "" + (DateTime.Now.ToString("ddMMyyyyHHmmss"));
+            Console.WriteLine(maKH);
             KhachHang kh = new KhachHang();
             kh.MaKhachHang = maKH;
             kh.HoKhachHang = model.HoKhachHang;
@@ -415,7 +416,7 @@ namespace LuanVan.Models
         {
 
             NhanVien nV = new NhanVien();
-            string maNV = "" + (danhSachNhanVien().Count() + 1);
+            string maNV = "" + (DateTime.Now.ToString("ddMMyyyyHHmmss")+2);
             nV.MaNhanVien = maNV;
             nV.HoNhanVien = hoNV;
             nV.TenNhanVien = tenNV;

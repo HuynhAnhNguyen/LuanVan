@@ -90,7 +90,7 @@ namespace LuanVan.Areas.Store.Controllers
 
 		[Area("Store"), HttpGet]
 		public IActionResult Register()
-		{
+		{	
 			var maKH = HttpContext.Session.GetString("CurrentUserID");
 			ViewBag.Loai = _service.danhSachLoaiSP().ToList();
 			ViewData["path"] = "/images/product/";

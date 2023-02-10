@@ -59,21 +59,20 @@
 
                                 <label for="NgaySinh">Ngày sinh <span class="text-danger">*</span></label>
                             </div>
-                            @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger p-2" })
+                            <span asp-validation-for="NgaySinh" class="text-danger p-2"></span>
 
 
                             @*Giới tính*@
                             <div class="form-floating">
                                 
                                 <select id="GioiTinh" name="GioiTinh" class="form-control">
-                                    <option >---Chọn giới tính---</option>
                                     <option value="Nam">Nam</option>
                                     <option value="Nữ">Nữ</option>
                                 </select>
                                 <label for="GioiTinh">Giới tính <span class="text-danger">*</span></label>
                                 
                             </div>
-                            @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger p-2" })
+                            <span asp-validation-for="GioiTinh" class="text-danger p-2"></span>
 
                             @*Số điện thoại*@
                             <div class="form-floating">
