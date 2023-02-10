@@ -18,7 +18,15 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
+
+builder.Services.AddNotyf(config => { 
+    config.DurationInSeconds = 10; 
+    config.IsDismissable = true; 
+    config.Position = NotyfPosition.TopRight; 
+});
+
+//builder.Services.AddRazorPages();
+
 builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 {
     ProgressBar = true,
@@ -40,13 +48,17 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseNotyf();
 app.UseSession();
 
 app.UseAuthorization();
 app.UseNToastNotify();
-app.UseNotyf();
+
 
 app.MapRazorPages();
+
+
 //app.MapControllerRoute(
 //    name: "default",
 //    pattern: "{controller=Home}/{action=Index}/{id?}");

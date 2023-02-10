@@ -550,5 +550,15 @@ namespace LuanVan.Models
             }
         }
 
+        public List<string> GetSdtListFromDB()
+        {
+            using (var db = new LuanVanContext())
+            {
+                return db.KhachHangs
+                         .Select(c => c.SoDienThoai)
+                         .ToList();
+            }
+        }
+
     }
 }

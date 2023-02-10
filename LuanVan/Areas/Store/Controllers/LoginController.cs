@@ -13,11 +13,11 @@ namespace LuanVan.Areas.Store.Controllers
     {
         private readonly Services _service;
         private readonly INotyfService _notyf;
-        private readonly IToastNotification _toastNotification;
-        public LoginController(Services service, IToastNotification _toastNotification, INotyfService _notyf)
+		private readonly IToastNotification _toastNotification;
+		public LoginController(Services service,  INotyfService _notyf, IToastNotification _toastNotification)
 		{
 			this._service = service;
-			this._toastNotification = _toastNotification;
+			this._toastNotification= _toastNotification;
             this._notyf = _notyf;
 		}
 
@@ -70,7 +70,12 @@ namespace LuanVan.Areas.Store.Controllers
 				session.SetString("CurrentUser", search.HoKhachHang + " " + search.TenKhachHang);
 				session.SetString("CurrentUserID", search.MaKhachHang.ToString());
 				Console.WriteLine(search.MaKhachHang.ToString());
-				return RedirectToAction("Index", "Home");
+
+                _notyf.Success("Đăng nhập thành công!", 3);
+                //_notyf.Success("Success Notification that closes in 10 Seconds.", 3);
+
+
+                return RedirectToAction("Index", "Home");
 			}
 			return View(model);
 		}
@@ -111,25 +116,49 @@ namespace LuanVan.Areas.Store.Controllers
 					
 					Console.WriteLine("otp send mail: " + otp);
 
-					string maKH=_service.themKH(model);
+					List<string> email= _service.GetEmailListFromDB();
+					List<string> sdt = _service.GetSdtListFromDB();
 
-                    //_service.suaTTKhachHang(maKH, otp); // sửa lại trạng thái KH= otp
+                    foreach (var e in email){
+						if(e == model.Email)
+						{
+                            //ModelState.AddModelError("", "Địa chỉ email đã tồn tại");
+							_toastNotification.AddErrorToastMessage("Địa chỉ email đã tồn tại");
+							return View(model);
+                        }
+                        
+                    }
 
-					_toastNotification.AddSuccessToastMessage("Đăng ký tài khoản thành công!");
+                    foreach (var s in sdt)
+                    {
+                        if (s == model.SoDienThoai)
+                        {
+                            //ModelState.AddModelError("", "Số điện thoại đã tồn tại");
+                            _toastNotification.AddErrorToastMessage("Số điện thoại đã tồn tại");
+                            return View(model);
+                        }
 
-                    //// Info Toast
-                    //_toastNotification.AddInfoToastMessage("Here is some information.");
+                    }
 
-                    //// Error Toast
-                    //_toastNotification.AddErrorToastMessage("Woops an error occured.");
 
-                    //// Warning Toast
-                    //_toastNotification.AddWarningToastMessage("Here is a simple warning!");
+                    string maKH=_service.themKH(model);
 
-                    _notyf.Success("Success Notification");
-                    _notyf.Success("Success Notification that closes in 10 Seconds.", 3);
+					//_service.suaTTKhachHang(maKH, otp); // sửa lại trạng thái KH= otp
 
-                    return RedirectToAction("Index", "Login");
+					//_toastNotification.AddSuccessToastMessage("Đăng ký tài khoản thành công!");
+					//_toastNotification.AddAlertToastMessage("Hi");
+
+					//// Info Toast
+					_toastNotification.AddInfoToastMessage("Đăng ký tài khoản thành công!");
+
+					//// Error Toast
+					//_toastNotification.AddErrorToastMessage("Woops an error occured.");
+
+					//// Warning Toast
+					//_toastNotification.AddWarningToastMessage("Here is a simple warning!");
+
+
+					return RedirectToAction("Index", "Login");
 				}
 				else
 				{

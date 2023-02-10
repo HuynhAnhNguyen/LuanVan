@@ -106,7 +106,8 @@
 
 
 
-
+    @await Component.InvokeAsync("Notyf")
+    @RenderSection("Scripts", required: false)
 
     <!-- Jquery -->
     <script src="~/js/jquery.min.js"></script>

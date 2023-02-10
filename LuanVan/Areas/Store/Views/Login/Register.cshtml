@@ -55,34 +55,23 @@
 
                             @*Ngày sinh*@
                             <div class="form-floating">
-                                @Html.TextBoxFor(model => model.NgaySinh,
-                            new
-                            {
-                            @id = "NgaySinh",
-                            @class = "form-control",
-                            @placeholder = "Ngày sinh",
-                            @autofocus = "autofocus"
-                            })
+                                <input asp-for="NgaySinh" class="form-control" />
+
                                 <label for="NgaySinh">Ngày sinh <span class="text-danger">*</span></label>
-                                @*<input type="date" id="dob" name="dob">*@
                             </div>
                             @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger p-2" })
 
+
                             @*Giới tính*@
                             <div class="form-floating">
-                                @Html.TextBoxFor(model => model.GioiTinh,
-                            new
-                            {
-                            @id = "GioiTinh",
-                            @class = "form-control",
-                            @placeholder = "Giới tính",
-                            @autofocus = "autofocus"
-                            })
+                                
+                                <select id="GioiTinh" name="GioiTinh" class="form-control">
+                                    <option >---Chọn giới tính---</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                </select>
                                 <label for="GioiTinh">Giới tính <span class="text-danger">*</span></label>
-                                @*<select id="gender" name="gender">
-                                    <option value="male">Nam</option>
-                                    <option value="female">Nữ</option>
-                                </select>*@
+                                
                             </div>
                             @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger p-2" })
 
@@ -164,7 +153,7 @@
             </div>
         </div>
     </div>
-    <script>
+    @*<script>
         function checkEmail(e){
             $.ajax({
                 type: "POST",
@@ -181,8 +170,8 @@
         }
 
 
-    </script>
-    
+    </script>*@
+    @await Component.InvokeAsync("NToastNotify")
 
 </body>
 </html>

@@ -33,7 +33,7 @@
                             @placeholder = "Số điện thoại",
                             @autofocus = "autofocus"
                             })
-                                <label for="sdt">Số điện thoại/Email</label>
+                                <label for="sdt">Số điện thoại/Email <span class="text-danger">*</span></label>
                             </div>
                             @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger p-2"})
 
@@ -47,7 +47,7 @@
                             @placeholder = "Password",
                             @type = "password"
                             })
-                                <label for="Password">Mật khẩu</label>
+                                <label for="Password">Mật khẩu <span class="text-danger">*</span></label>
                             </div>
                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger p-2" })
                             <div class="form-check">
@@ -72,7 +72,8 @@
     </div>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
     @await Component.InvokeAsync("NToastNotify")
-    @await Component.InvokeAsync("Notyf")
+    
 </body>
 </html>

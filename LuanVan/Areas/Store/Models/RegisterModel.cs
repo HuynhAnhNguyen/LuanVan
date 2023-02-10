@@ -15,8 +15,10 @@ namespace LuanVan.Areas.Store.Models
         public string GioiTinh { get; set; }
         [Required(ErrorMessage = "Số điện thoại không được để trống")]
         [MaxLength(10)]
+        [RegularExpression(@"^\d{10,11}$", ErrorMessage = "Số điện thoại không hợp lệ")]
         public string? SoDienThoai { get; set; }
         [Required(ErrorMessage = "Email không được bỏ trống")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage="Địa chỉ email không hợp lệ" )]
         public string Email { get; set; }
         [Required(ErrorMessage = "Địa chỉ không được bỏ trống")]
         public string DiaChi { get; set; }
