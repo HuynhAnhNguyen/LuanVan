@@ -1,0 +1,130 @@
+﻿@model IEnumerable<LuanVan.Models.GioHang>
+@using LuanVan.Models;
+@if (Model.Count() > 0)
+{
+	<div class="container shopping-cart p-1">
+		<div class="row">
+			<div class="col-12">
+				<table class="table table-hover shopping-summery">
+					<thead>
+						<tr>
+							<th>Hình ảnh</th>
+							<th>Tên</th>
+							<th>Đơn giá</th>
+							<th>Số lượng</th>
+							<th>Đơn vị tính</th>
+							<th>Tổng</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						@{
+							long sum = 0;
+						}
+						@foreach (var item in Model)
+						{
+							<tr>
+								<td><img width="500px" height="500px" src="@ViewData["path"]@item.MaSanPhamNavigation?.HinhAnh" alt="#"></td>
+								<td>
+									@Html.DisplayFor(modelItem => item.MaSanPhamNavigation.TenSanPham)
+								</td>
+								<td>
+									@String.Format("{0:### ### ### ###}", item.MaSanPhamNavigation?.GiaBan)
+								</td>
+								<td>
+									<input type="number" class="form-control" id="@item.MaGioHang" data-gia="@item.MaSanPhamNavigation?.GiaBan" data-min="1" data-max="100" value="@item.SoLuongDat">
+								</td>
+								<td>
+									@item?.MaSanPhamNavigation?.TenDvt
+								</td>
+								@{
+									long t = (long)item.SoLuongDat * (long)item.MaSanPhamNavigation?.GiaBan;
+								}
+								@{
+									string id = item.MaGioHang + "t";
+								}
+								<td id="@id">@String.Format("{0:### ### ### ###}",t)</td>
+								<td>
+									<div class="form-check">
+										@{
+											string check_id = "ch" + item.MaGioHang;
+										}
+										<span for="@check_id">
+											Chọn
+										</span>
+										<input class="checkout" title=" Chọn" type="checkbox" id="@check_id" value="" data-id="@item.MaGioHang">
+									</div>
+								</td>
+								<td>
+									<a href="#" title="Xóa" class="text-danger text-decaration-none" data-madd="@item.MaGioHang" onclick="remove_dd(event.target)">Xóa</a>
+								</td>
+							</tr>
+							sum += (long)item.SoLuongDat * (long)item.MaSanPhamNavigation?.GiaBan;
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 d-flex">
+		<div class="btn btn-success mx-auto m-2" id="checkout">Thanh toán</div>
+	</div>
+	<script>
+		function add_amount(e) {
+			$.ajax({
+				type: 'POST',
+				url: '/Store/Cart/Increase',
+				data: { madd: e.id, sluong: e.value }
+			}).done((data) => {
+				console.log(data)
+			})
+		}
+
+		$('.form-control').change((e) => {
+			if (e.currentTarget.dataset.min > e.currentTarget.value) {
+				alert("Số lượng không hợp lệ");
+				e.currentTarget.value = 1;
+				return;
+			}
+			$.ajax({
+				type: 'POST',
+				url: '/Store/Cart/Increase',
+				data: { madd: e.currentTarget.id, sluong: e.currentTarget.value }
+			})
+			var gia = e.currentTarget.dataset.gia
+			var sl = e.currentTarget.value
+			var id = '#' + e.currentTarget.id + 't'
+			$(id).html(sl * gia)
+		})
+
+		$('#checkout').click((e) => {
+			var arr = [];
+			$('.checkout').each(function () {
+				if ($(this).is(':checked') == true) {
+					arr.push($(this).attr('data-id'));
+				}
+			})
+			var url = "/Store/Checkout/Confirm?listdd=" + JSON.stringify(arr);
+			console.log(arr.length);
+			if (arr.length == 0) {
+				Swal.fire({
+					title: 'Thông báo',
+					text: "Vui lòng chọn sản phẩm để tiến hành thanh toán!",
+					icon: 'warning',
+				})
+			} else {
+				window.location.href = url;
+			}
+
+		})
+	</script>
+}
+else
+{
+	<div class="d-flex">
+		<div class="mx-auto m-3">
+			Giỏ hàng trống
+		</div>
+	</div>
+}

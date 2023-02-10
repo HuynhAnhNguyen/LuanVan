@@ -1,0 +1,22 @@
+﻿@model IEnumerable<LuanVan.Models.GioHang>
+<div class="single-widget">
+	<h2>Sản phẩm</h2>
+	<div class="content">
+		<ul>
+			@{
+				long sum = 0;
+			}
+			@foreach (var item in Model)
+			{
+					<li>
+						<b>@item.MaSanPhamNavigation.TenSanPham</b>
+						<p class="quantity">Số lượng: @item.SoLuongDat<span class="amount">Đơn giá: @String.Format("{0:### ### ### ### VNĐ}", item.MaSanPhamNavigation.GiaBan)</span></p>
+					</li>
+				sum += (long)item.SoLuongDat * (long)item.MaSanPhamNavigation.GiaBan;
+			}
+		</ul>
+		<ul>
+			<li class="last"><h6>Tổng<span>@String.Format("{0:### ### ### ### VNĐ}", sum)</span></h6></li>
+		</ul>
+	</div>
+</div>

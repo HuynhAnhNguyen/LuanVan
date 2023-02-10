@@ -1,0 +1,112 @@
+﻿@model IEnumerable<LuanVan.Models.GioHang>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Store/Views/Shared/_Layout.cshtml";
+}
+
+<section class="shop checkout section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-12">
+				<div class="checkout-form">
+					<h2>Thông tin cần thiết</h2>
+					<p>Đăng nhập để thanh toán nhanh hơn</p>
+					<!-- Form -->
+					<form class="form" method="post" action="#">
+						<div class="row">
+							<div class="col-lg-6 col-md-6 col-12">
+								<div class="form-group">
+									<label>Họ lót<span>*</span></label>
+									<input type="text" name="HoLot" placeholder="Họ lót" required="required">
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-12">
+								<div class="form-group">
+									<label>Tên<span>*</span></label>
+									<input type="text" name="Tên" placeholder="Tên" required="required">
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-12">
+								<div class="form-group">
+									<label>Số điện thoại*<span>*</span></label>
+									<input type="text" name="SoDienThoai" placeholder="Số điện thoại" required="required">
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-12">
+								<div class="form-group">
+									<label>Email</label>
+									<input type="email" name="Email" placeholder="Email" required="required">
+								</div>
+							</div>
+							<div class="col-12">
+								<a href="/Store/Login/Register" class="text-primary text-decoration-none">Đăng kí tài khoản</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-lg-4 col-12">
+				<div class="order-details">
+					<div class="single-widget">
+						<h2>Sản phẩm</h2>
+						<div class="content">
+							<ul>
+								@{
+									long sum = 0;
+								}
+								@foreach (var item in Model)
+								{
+									<li>
+										<b>@item.MaSanPhamNavigation.TenSanPham</b>
+										<p class="quantity">Số lượng: @item.SoLuongDat<span class="amount">Đơn giá: @String.Format("{0:### ### ### ### VNĐ}", item.MaSanPhamNavigation.GiaBan)</span></p>
+									</li>
+									sum += (long)item.SoLuongDat * (long)item.MaSanPhamNavigation.GiaBan;
+								}
+							</ul>
+							<ul>
+								<li>Tổng đơn giá<span>@String.Format("{0:### ### ### ### VNĐ}", sum)</span></li>
+								<li>Phí vận chuyển (+)<span>10 000 VNĐ</span></li>
+								<li class="last">Tổng<span>@String.Format("{0:### ### ### ### VNĐ}", sum+10000)</span></li>
+							</ul>
+						</div>
+					</div>
+					<!--/ End Order Widget -->
+					<!-- Order Widget -->
+					<div class="single-widget">
+						<h2>Phương thức thanh toán</h2>
+						<div class="content ps-5 pt-2">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="payment" id="cod">
+								<label class="form-check-label" for="cod">
+									Thanh toán khi nhận hàng
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="payment" id="zalopay">
+								<label class="form-check-label" for="zalopay">
+									Ví ZaloPay
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="payment" id="bank" checked>
+								<label class="form-check-label" for="bank">
+									Thẻ tín dụng
+								</label>
+							</div>
+						</div>
+					</div>
+					<!-- Button Widget -->
+					<div class="single-widget get-button">
+						<div class="content">
+							<div class="button">
+								<a href="#" class="btn">Thanh toán</a>
+							</div>
+						</div>
+					</div>
+					<!--/ End Button Widget -->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

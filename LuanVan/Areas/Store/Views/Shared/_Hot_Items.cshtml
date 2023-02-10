@@ -1,0 +1,27 @@
+﻿@model IEnumerable<LuanVan.Models.SanPham>
+<!-- Start Most Popular -->
+<div class="product-area most-popular section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Sản phẩm được mua nhiều nhất</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel popular-slider">
+                    <!-- Start Single Product -->
+                    @foreach (var item in Model)
+                    {
+                        @await Html.PartialAsync("_Product_Card", item)
+                    }
+                    <!-- End Single Product -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Most Popular Area -->

@@ -1,0 +1,89 @@
+﻿@model LuanVan.Models.HoaDon
+@using LuanVan.Models
+
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Areas/Store/Views/Shared/_Layout.cshtml";
+}
+<div class="product-area section pt-4">
+    <div class="container col-7">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title p-0">
+                    <h2>Thông tin hóa đơn</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-2">
+                        @{
+                            HoaDon hoadon = ViewData["hoadon"] as HoaDon;
+                        }
+                        <table class="table v-middle table-hover">
+                            <tr>
+                                <th>Mã hóa đơn</th>
+                                <td>@hoadon.MaHoaDon</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày lập</th>
+                                <td>@hoadon.NgayXuatHd</td>
+                            </tr>
+                            <tr>
+                                <th>Tổng giá trị</th>
+                                <td>@String.Format("{0:### ### ### ###}", ViewData["sum"])</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card p-1">
+                    <div class="card-body p-2">
+                        <table class="table v-middle table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Loại sản phẩm</th>
+                                    <th>Đơn vị tính</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model?.ChiTietHds)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img width="300px" height="300px" src="@ViewData["path"]@item?.MaGioHangNavigation?.MaSanPhamNavigation?.HinhAnh" />
+                                        </td>
+                                        <td>
+                                            @item?.MaGioHangNavigation?.MaSanPhamNavigation?.TenSanPham
+                                        </td>
+                                        <td>
+                                            @item?.MaGioHangNavigation?.MaSanPhamNavigation?.MaLoaiSpNavigation?.TenLoaiSp
+                                        </td>
+                                        <td>
+                                            @item?.MaGioHangNavigation?.MaSanPhamNavigation?.TenDvt
+                                        </td>
+                                        <td>
+                                            @item?.MaGioHangNavigation?.SoLuongDat
+                                        </td>
+                                        <td>
+                                            @item?.MaGioHangNavigation?.MaSanPhamNavigation?.GiaBan
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="d-flex">
+                            <div class="btn mx-auto"><a href="/Store/HomePage/Index">Về trang chủ</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

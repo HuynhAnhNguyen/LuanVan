@@ -1,0 +1,49 @@
+﻿@model IEnumerable<LuanVan.Models.GioHang>
+@using LuanVan.Areas.Store.Models;
+
+
+@{
+    ViewData["Title"] = "Receipt";
+    Layout = "~/Areas/Store/Views/Shared/_Layout.cshtml";
+}
+
+<section class="shop checkout section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="card">
+                    <div class="card-body p-2">
+                        @{
+                            HoaDonModel hoadon = ViewData["info"] as HoaDonModel;
+                        }
+                        <table class="table v-middle table-hover">
+                            <tr>
+                                <th>Mã hóa đơn</th>
+                                <td>@hoadon.MaHoaDon</td>
+                            </tr>
+                            <tr>
+                                <th>Khách hàng</th>
+                                <td>@hoadon.Holot @hoadon.Ten</td>
+                            </tr>
+                            <tr>
+                                <th>Số điện thoại</th>
+                                <td>@hoadon.SoDienThoai</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày lập</th>
+                                <td>@DateTime.Now</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="order-details p-0 m-0">
+                    <partial name="_Cart_checkout" model="Model" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

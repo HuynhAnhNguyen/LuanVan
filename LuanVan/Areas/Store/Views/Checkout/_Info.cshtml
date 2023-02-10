@@ -1,0 +1,42 @@
+﻿@model LuanVan.Areas.Store.Models.HoaDonModel
+<form class="form" method="post" action="Receipt" id="info">
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-12">
+			<div class="form-group">
+				<label>Họ lót<span>*</span></label>
+				<input type="text" name="HoLot" placeholder="Họ lót" value="@Model?.Holot" required>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-12">
+			<div class="form-group">
+				<label>Tên<span>*</span></label>
+				<input type="text" name="Ten" placeholder="Tên" value="@Model?.Ten" required>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-12">
+			<div class="form-group">
+				<label>Số điện thoại<span>*</span></label>
+				<input type="text" name="SoDienThoai" placeholder="Số điện thoại" value="@Model?.SoDienThoai" required>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-12">
+			<div class="form-group">
+				<label>Email</label>
+				<input type="email" name="Email" placeholder="Email" value="@Model?.Email">
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-6 col-12 d-none">
+			<div class="form-group">
+				<label>Đơn đặt</label>
+				@{
+					string vl = Context.Request.Query["listdd"].ToString();
+					if (Model != null && Model.GioHangs != "") vl = Model.GioHangs;
+				}
+				<input type="text" name="DonDats" placeholder="Đơn đặt" value="@vl">
+			</div>
+		</div>
+		<div class="col-12">
+			<a href="/Store/Login/Register" class="text-primary text-decoration-none">Đăng kí tài khoản</a>
+		</div>
+	</div>
+</form>

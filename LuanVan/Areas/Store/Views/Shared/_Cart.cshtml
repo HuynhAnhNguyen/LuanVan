@@ -1,0 +1,48 @@
+﻿@model List<LuanVan.Models.GioHang>
+@if (Context.Session.GetString("CurrentUserID") != null)
+{
+	@if (Model.Count() > 0)
+	{
+		<div class="sinlge-bar shopping">
+			<a href="/Store/Cart/MyItems" class="single-icon">
+				<i class="fas fa-shopping-cart"></i>
+				<span class="total-count">@Model.Count()</span>
+			</a>
+		</div>
+		<script>
+			$('.remove').click((e) => {
+				var madd = e.currentTarget.dataset.madd
+				$.ajax({
+					type: 'POST',
+					url: '/Store/Cart/RemoveItems',
+					data: { madd: madd }
+				}).done((data) => {
+					$('#cart_container').html(data);
+				})
+			})
+		</script>
+	}
+	else
+	{
+		<div class="sinlge-bar shopping">
+			<a href="#" class="single-icon"><i class="fas fa-shopping-cart"></i><span class="total-count">@Model.Count()</span></a>
+			<!-- Shopping Item -->
+			<div class="shopping-item">
+				<div class="d-flex">
+					<div class="mx-auto">Giỏ hàng trống</div>
+				</div>
+			</div>
+		</div>
+	}
+}
+else
+{
+	<div class="sinlge-bar shopping">
+		<a href="#" class="single-icon"><i class="fas fa-shopping-cart"></i></a>
+		<div class="shopping-item">
+			<div class="d-flex">
+				<div class="mx-auto">Đăng nhập đế sử dụng giỏ hàng</div>
+			</div>
+		</div>
+	</div>
+}

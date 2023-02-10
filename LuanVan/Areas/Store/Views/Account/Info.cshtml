@@ -1,0 +1,53 @@
+﻿@model LuanVan.Models.KhachHang
+
+@{
+    ViewData["Title"] = "Thông tin tài khoản " + Model.HoKhachHang + " " + Model.TenKhachHang;
+    Layout = "~/Areas/Store/Views/Shared/_Layout.cshtml";
+}
+<div class="product-area section pt-4">
+    <div class="container col-7">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title p-0">
+                    <h2>Thông tin tài khoản</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body p-2">
+                        <table class="table v-middle table-hover">
+                            <tr>
+                                <th>Họ và tên</th>
+                                <td>@Model?.HoKhachHang @Model?.TenKhachHang</td>
+                            </tr>
+                            <tr>
+                                <th>Ngày sinh</th>
+                                <td>@Model?.NgaySinh</td>
+                            </tr>
+                            <tr>
+                                <th>Giới tính</th>
+                                <td>@Model?.GioiTinh</td>
+                            </tr>
+                            <tr>
+                                <th>Số điện thoại</th>
+                                <td>@Model?.SoDienThoai</td>
+                            </tr>
+                            <tr>
+                                <th>Địa chỉ</th>
+                                <td>@Model?.DiaChi</td>
+                            </tr>
+
+                        </table>
+                        <div class="d-flex">
+                            <div class="btn mx-auto me-1"><a href="/Store/Home/Index">Về trang chủ</a></div>
+                            <div class="btn mx-auto me-1"><a href="/Store/Account/Info">Cập nhật thông tin</a></div>
+                            <div class="btn mx-auto ms-1"><a href="/Store/Receipt/List">Lịch sử thanh toán</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

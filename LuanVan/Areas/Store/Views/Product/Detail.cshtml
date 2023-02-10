@@ -1,0 +1,55 @@
+﻿@model LuanVan.Models.SanPham
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Store/Views/Shared/_Layout.cshtml";
+}
+<div class="product-area section pt-4">
+    <div class="container col-7">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title p-0">
+                    <h2>Thông tin sản phẩm</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <img src="@ViewData["path"]@Model.HinhAnh" />
+            </div>
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body p-2">
+                        <table class="table v-middle table-hover">
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <td>@Model?.TenSanPham</td>
+                            </tr>
+                            <tr>
+                                <th>Phân loại</th>
+                                <td>@Model?.MaLoaiSpNavigation?.TenLoaiSp</td>
+                            </tr>
+                            <tr>
+                                <th>Đơn vị tính</th>
+                                <td>@Model?.TenDvt</td>
+                            </tr>
+                            <tr>
+                                <th>Giá bán</th>
+                                <td>@String.Format("{0:### ### ### ### VND}", Model.GiaBan)</td>
+                            </tr>
+                        </table>
+                        <div class="d-flex">
+                            <div class="btn btn-sm btn-success m-2" data-masp="@Model?.MaSanPham" onclick="shop_now(event.currentTarget)">Mua ngay</div>
+                            <div class="btn btn-sm btn-success m-2" id="@Model?.MaSanPham" onclick="add_to_cart(event.currentTarget)">Thêm vào giỏ hàng</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    List<LuanVan.Models.SanPham> list_sp = ViewData["hot_items"] as List<LuanVan.Models.SanPham>;
+}
+<partial name="_Hot_Items" model="list_sp" />

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<LuanVan.Models.SanPham>
+
+@if (Model.Count() > 0)
+{
+
+	<div class="tab-pane fade show active" id="man" role="tabpanel">
+		<div class="tab-single">
+			<div class="row">
+				@foreach (var item in Model)
+				{
+					<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+						@await Html.PartialAsync("_Product_Card", item)
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+}
+else
+{
+	<div class="text-center">
+		<div>--- Danh sách trống ---</div>
+	</div>
+}

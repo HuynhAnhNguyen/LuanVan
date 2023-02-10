@@ -1,0 +1,67 @@
+﻿@model IEnumerable<LuanVan.Models.KhachHang>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Danh sách thông tin khách hàng</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                Họ và tên khách hàng
+
+            </th>
+            <th>
+                Ngày sinh
+            </th>
+            <th>
+                Giới tính
+            </th>
+            <th>
+                Số điện thoại
+            </th>
+            <th>
+                Cập nhật
+            </th>
+        </tr>
+    </thead>
+    @{
+        var stt = 1;
+    }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @stt
+                    @{
+                        stt++;
+                    }
+                </td>
+                <td>
+                    <a href="/Admin/KhachHang/DetailsKhachHang?id=@item.MaKhachHang" class="text-decoration-none">@item.HoKhachHang @item.TenKhachHang</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GioiTinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoDienThoai)
+                </td>
+
+                <td>
+                    <a asp-action="DetailsKhachHang" asp-route-id="@item.MaKhachHang" class="btn btn-sm btn-outline-info">Thông tin chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

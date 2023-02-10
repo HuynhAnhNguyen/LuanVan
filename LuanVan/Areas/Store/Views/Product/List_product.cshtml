@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LuanVan.Models.SanPham>
+@using LuanVan.Models;
+
+
+@{
+    ViewData["Title"] = "List_product";
+    Layout = "~/Areas/Store/Views/Shared/_Layout.cshtml";
+}
+<div class="product-area section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title">
+					<h2>Sản phẩm thuộc @ViewData["loaivt"]</h2>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="product-info">
+					<div class="tab-content" id="myTabContent">
+						<partial name="_Product_Fillter" model="Model"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+@{
+	List<SanPham> list = ViewData["hot_items"] as List<SanPham>;
+}
+<partial name="_Hot_Items" model="list.Take(8)"/>

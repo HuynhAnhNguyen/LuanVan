@@ -1,0 +1,141 @@
+﻿@using LuanVan.Models
+<!-- Header -->
+<header class="header shop">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-12">
+                    <!-- Top Left -->
+                    <div class="top-left">
+                        <ul class="list-main">
+                            <li><i class="ti-headphone-alt"></i><a href="tel:0388544031">+84 388544031</a> </li>
+                            <li><i class="ti-email"></i><a href="mailto: anhB1910186@student.ctu.edu.vn">anhB1910186@student.ctu.edu.vn</a></li>
+                        </ul>
+                    </div>
+                    <!--/ End Top Left -->
+                </div>
+                <div class="col-lg-7 col-md-12 col-12">
+                    <!-- Top Right -->
+                    <div class="right-content">
+                        <ul class="list-main">
+                            @if (Context.Session.GetString("CurrentUserID") != null)
+                            {
+                                <li><i class="ti-user"></i> <a href="/Store/Account/Info">@Context.Session.GetString("CurrentUser")</a></li>
+                                <li><i class="fa fa-sign-out text-danger"></i><a href="/Store/Login/Logout">Đăng xuất </a></li>
+                            }
+                            else
+                            {
+                                <li><i class="fa fa-sign-in"></i><a href="/Store/Login/Index">Đăng nhập</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- End Top Right -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Topbar -->
+    <div class="middle-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-12">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="/Store/Home/Index"><img src="~/images/ishop.png" alt="logo"></a>
+                    </div>
+                    <!--/ End Logo -->
+                    <!-- Search Form -->
+                    <div class="search-top">
+                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+                        <!-- Search Form -->
+                        <div class="search-top">
+                            <form class="search-form">
+                                <input type="text" placeholder="Tìm kiếm" name="search">
+                                <button value="search" type="submit"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                        <!--/ End Search Form -->
+                    </div>
+                    <!--/ End Search Form -->
+                    <div class="mobile-nav"></div>
+                </div>
+                <div class="col-lg-8 col-md-7 col-12">
+                    <div class="search-bar-top">
+                        <div class="search-bar">
+                            <select>
+                                <option selected="selected">Tất cả loại</option>
+                                @foreach (var loaiSP in ViewBag.Loai)
+                                {
+                                    <option value="@loaiSP.MaLoaiSp">@loaiSP.TenLoaiSp</option>
+                                }
+                            </select>
+                            <form action="/Store/Product/Search" method="get">
+                                @{
+                                    string? key = ViewData["key"] as string;
+                                }
+                                <input name="key" placeholder="Tìm kiếm sản phẩm của bạn" type="search">
+                                <button class="btnn"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-12">
+                    <div class="right-bar">
+                        @{
+                            List<GioHang> items = ViewData["cart_items"] as List<GioHang>;
+                        }
+                        <div id="cart_container">
+                            <partial name="_Cart" model="items" />
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Inner -->
+    <div class="header-inner">
+        <div class="container">
+            <div class="cat-nav-head">
+                <div class="row">
+
+                    <div class="col-lg-9 col-12">
+                        <div class="menu-area">
+                            <!-- Main Menu -->
+                            <nav class="navbar navbar-expand-lg">
+                                <div class="navbar-collapse">
+                                    <div class="nav-inner">
+                                        <ul class="nav main-menu menu navbar-nav">
+                                            <li class=@((ViewData["Title"].ToString() == "Trang chủ")?"active":"")><a href="/Store/Home/Index">Trang chủ</a></li>
+                                            <li class=@((ViewData["Title"].ToString() == "Danh mục")?"active":"")>
+                                                <a href="#">Danh mục<i class="ti-angle-down"></i></a>
+                                                <ul class="dropdown">
+                                                    @foreach (var loai in ViewBag.Loai)
+                                                    {
+                                                        <li><a href="/Store/Product/List_product?maloai=@loai.MaLoaiSp">@loai.TenLoaiSp</a></li>
+                                                    }
+                                                </ul>
+                                            </li>
+
+                                            <li><a href="#">Thông tin</a></li>
+                                            <li>
+                                                <a href="#">Tin tức<i class="ti-angle-down"></i></a>
+                                                <ul class="dropdown">
+                                                    <li><a href="#">Về chúng tôi</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="#">Kết nối</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                            <!--/ End Main Menu -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ End Header Inner -->
+</header>
