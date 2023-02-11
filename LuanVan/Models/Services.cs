@@ -567,5 +567,29 @@ namespace LuanVan.Models
             }
         }
 
+        public void sendMail(string noiDung, string mailTo, string tieuDe)
+        {
+            //gui email
+
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("anhB1910186@student.ctu.edu.vn");
+
+            //var kh = _service.getKH(model.MaKhachHang);
+            mailMessage.To.Add(new MailAddress(mailTo));
+
+            mailMessage.Subject = tieuDe;
+
+            mailMessage.IsBodyHtml = true;
+            mailMessage.Body = noiDung;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Port = 587; // 25 465
+            smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
+            smtp.Host = "smtp.gmail.com";
+            smtp.Credentials = new System.Net.NetworkCredential("anhB1910186@student.ctu.edu.vn", "huynhanh18+");
+            smtp.Send(mailMessage);
+
+        }
+
     }
 }

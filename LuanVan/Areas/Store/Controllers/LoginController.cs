@@ -1,9 +1,6 @@
 ﻿using LuanVan.Areas.Store.Models;
 using LuanVan.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mail;
-using System;
-using static System.Net.WebRequestMethods;
 using NToastNotify;
 using AspNetCoreHero.ToastNotification.Abstractions;
 
@@ -113,13 +110,11 @@ namespace LuanVan.Areas.Store.Controllers
         [Area("Store"), HttpPost]
 		public IActionResult Register(RegisterModel model)
 		{
-            string otp = _service.createOTP();
             if (ModelState.IsValid)
 			{
                 if (model.MatKhau == model.MatKhau2)
 				{
 					
-					Console.WriteLine("otp send mail: " + otp);
 
 					List<string> email= _service.GetEmailListFromDB();
 					List<string> sdt = _service.GetSdtListFromDB();
@@ -144,9 +139,21 @@ namespace LuanVan.Areas.Store.Controllers
                         }
 
                     }
+					string noiDung = "Chúc mừng bạn đã đăng ký tài khoản thành công tại Ishopping. <br><br><br> Thông tin tài khoản của bạn:" +
+                        "<br>Họ và tên: " + model.HoKhachHang + " " + model.TenKhachHang +
+                        "<br>Ngày sinh: " + model.NgaySinh +
+                        "<br>Giới tính: " + model.GioiTinh +
+                        "<br>SĐT: " + model.SoDienThoai +
+                        "<br>Địa chỉ: " + model.DiaChi +
+                        "<br>Email: " + model.Email +
+                        "<br><br><br>Chúc bạn có những trải nghiệm vui tại Ishoopping.";
 
+                    string tieuDe = "Đăng ký tài khoản thành công!";
+
+                    //_service.sendMail(noiDung, model.Email, tieuDe);
 
                     string maKH=_service.themKH(model);
+					
 
 					//_service.suaTTKhachHang(maKH, otp); // sửa lại trạng thái KH= otp
 
